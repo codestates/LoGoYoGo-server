@@ -30,6 +30,31 @@
     "sequelize": "^6.6.2"
   },
   "devDependencies": {
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1",
     "sequelize-cli": "^6.2.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended",
+      "prettier/@typescript-eslint"
+    ],
+    "parserOptions": {
+      "project": "./tsconfig.json",
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "ignorePatterns": [
+      "dist/",
+      "node_modules/"
+    ],
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/no-explicit-any": "off"
+    }
   }
 }
