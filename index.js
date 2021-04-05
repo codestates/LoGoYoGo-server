@@ -5,7 +5,7 @@ const cors = require("cors");
 const http = require("http");
 const https = require("https");
 const cookieParser = require("cookie-parser");
-const usercontroller = require("./controllers/user");
+const user = require("./controllers/user");
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.post("/user/signup", usercontroller.signup);
+app.post("/user/signup", user.signup);
 
 http.createServer(app).listen(5000, () => {
   console.log("server on 5000");
