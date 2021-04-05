@@ -17,6 +17,9 @@ app.use(cookieParser());
 app.post("/user/signup", user.signup);
 app.post("/user/signin", user.signin);
 app.post("/user/signout", user.signout);
+app.post("/user/editpw", user.editpw);
+app.post("/user/userinfo", user.userinfo);
+app.post("/user/deleteid", user.deleteid);
 
 http.createServer(app).listen(5000, () => {
   console.log("server on 5000");
