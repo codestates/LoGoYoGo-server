@@ -52,4 +52,53 @@ module.exports = {
   signout: async (req, res) => {
     res.status(200).json({ message: "ok" });
   },
+
+  editpw: async (req, res) => {
+    const accessToken = req.body.accessToken;
+    const userInfo = jwt.verify(accessToken, process.env.ACCESS_SECRET);
+    const users = await user.findOne({
+      where: {
+        email: userInfo.email,
+      },
+    });
+    if (req.body.password !== users.dataValues.password) {
+      console.log("###########", req.body.password, users.dataValues.password);
+      res.status(404).json({ message: "check agin" });
+    } else {
+      user
+        .update(
+          {
+            password: req.body.editpw,
+          },
+          { where: { email: userInfo.email } }
+        )
+        .then(() => {
+          res.status(200).json({ message: "ok" });
+        });
+    }
+  },
+
+  userinfo: async (req, res) => {
+    const accessToken = req.body.accessToken;
+    const userinfo = jwt.verify(accessToken, process.env.ACCESS_SECRET);
+
+    res.status(200).json({ message: "ok", data: userinfo });
+  },
+
+  deleteid: async (req, res) => {
+    const accessToken = req.body.accessToken;
+    const userInfo = jwt.verify(accessToken, process.env.ACCESS_SECRET);
+
+    console.log(userInfo);
+
+    user
+      .destroy({
+        where: {
+          email: userInfo.email,
+        },
+      })
+      .then(() => {
+        res.status(200).json({ message: "ok" });
+      });
+  },
 };
