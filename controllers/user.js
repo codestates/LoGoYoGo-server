@@ -39,6 +39,7 @@ module.exports = {
         res.status(404).json({ message: "fail" });
       } else {
         delete userInfo.dataValues.password;
+
         const accessToken = jwt.sign(
           userInfo.dataValues,
           process.env.ACCESS_SECRET,
@@ -62,7 +63,7 @@ module.exports = {
       },
     });
     if (req.body.password !== users.dataValues.password) {
-      console.log("###########", req.body.password, users.dataValues.password);
+
       res.status(404).json({ message: "check agin" });
     } else {
       user
@@ -70,7 +71,9 @@ module.exports = {
           {
             password: req.body.editpw,
           },
+
           { where: { email: userInfo.email } }
+
         )
         .then(() => {
           res.status(200).json({ message: "ok" });
@@ -89,7 +92,6 @@ module.exports = {
     const accessToken = req.body.accessToken;
     const userInfo = jwt.verify(accessToken, process.env.ACCESS_SECRET);
 
-    console.log(userInfo);
 
     user
       .destroy({
