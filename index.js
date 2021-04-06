@@ -20,7 +20,9 @@ app.post("/user/signout", user.signout);
 app.post("/user/editpw", user.editpw);
 app.post("/user/userinfo", user.userinfo);
 app.post("/user/deleteid", user.deleteid);
+
 app.post("/callback");
+
 
 http.createServer(app).listen(5000, () => {
   console.log("server on 5000");
