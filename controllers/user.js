@@ -1,5 +1,7 @@
 const models = require("../models");
 const { user, logo, preset } = models;
+const jwt = require("jsonwebtoken");
+
 require("dotenv").config();
 
 module.exports = {
