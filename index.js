@@ -21,7 +21,7 @@ app.post("/user/editpw", user.editpw);
 app.post("/user/userinfo", user.userinfo);
 app.post("/user/deleteid", user.deleteid);
 
-app.post("/callback");
+app.post("/callback", callback);
 
 
 http.createServer(app).listen(5000, () => {
