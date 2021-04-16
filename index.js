@@ -9,7 +9,13 @@ const user = require("./controllers/user");
 const callback = require("./controllers/callback");
 const app = express();
 
-app.use(cors({}));
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    credentials: true,
+    methods: ["GET", "POST", "DELETE", "PUT", "OPTIONS"],
+  }),
+);
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -22,7 +28,6 @@ app.post("/user/userinfo", user.userinfo);
 app.post("/user/deleteid", user.deleteid);
 
 app.post("/callback", callback);
-
 
 http.createServer(app).listen(5000, () => {
   console.log("server on 5000");
