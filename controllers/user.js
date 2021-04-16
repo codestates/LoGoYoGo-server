@@ -2,6 +2,7 @@ const models = require("../models");
 const { user, logo, preset } = models;
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const fs = require("fs");
 
 module.exports = {
   signup: async (req, res) => {
@@ -15,7 +16,7 @@ module.exports = {
     } else {
       user
         .create({
-          name: req.body.name,
+          name: req.body.username,
           email: req.body.email,
           password: req.body.password,
         })
@@ -40,11 +41,9 @@ module.exports = {
       } else {
         delete userInfo.dataValues.password;
 
-        const accessToken = jwt.sign(
-          userInfo.dataValues,
-          process.env.ACCESS_SECRET,
-          { expiresIn: "1h" }
-        );
+        const accessToken = jwt.sign(userInfo.dataValues, process.env.ACCESS_SECRET, {
+          expiresIn: "1h",
+        });
         res.status(200).json({ accessToken: accessToken, message: "ok" });
       }
     }
@@ -63,7 +62,6 @@ module.exports = {
       },
     });
     if (req.body.password !== users.dataValues.password) {
-
       res.status(404).json({ message: "check agin" });
     } else {
       user
@@ -72,8 +70,7 @@ module.exports = {
             password: req.body.editpw,
           },
 
-          { where: { email: userInfo.email } }
-
+          { where: { email: userInfo.email } },
         )
         .then(() => {
           res.status(200).json({ message: "ok" });
@@ -92,7 +89,6 @@ module.exports = {
     const accessToken = req.body.accessToken;
     const userInfo = jwt.verify(accessToken, process.env.ACCESS_SECRET);
 
-
     user
       .destroy({
         where: {
@@ -102,5 +98,11 @@ module.exports = {
       .then(() => {
         res.status(200).json({ message: "ok" });
       });
+  },
+
+  save: async (req, res) => {
+    const text = req.body.json;
+    fs.writeFileSync("./save.txt", JSON.stringify(text));
+    res.status(200).json({ text: text });
   },
 };
