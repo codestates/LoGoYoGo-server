@@ -3,7 +3,6 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require("http");
-const https = require("https");
 const cookieParser = require("cookie-parser");
 const user = require("./controllers/user");
 const callback = require("./controllers/callback");
