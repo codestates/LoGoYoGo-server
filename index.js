@@ -3,7 +3,6 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require("http");
-const https = require("https");
 const cookieParser = require("cookie-parser");
 const user = require("./controllers/user");
 const callback = require("./controllers/callback");
@@ -26,6 +25,12 @@ app.post("/user/signout", user.signout);
 app.post("/user/editpw", user.editpw);
 app.post("/user/userinfo", user.userinfo);
 app.post("/user/deleteid", user.deleteid);
+
+// app.post("/save", user.save);
+// app.post("/saveimg", user.saveimg);
+
+app.post("/savelogo", user.savelogo);
+app.post("/loadlogo", user.loadlogo);
 
 app.post("/callback", callback);
 

@@ -16,15 +16,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       setting: {
-        type: Sequelize.STRING,
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.TEXT,
       },
     });
   },

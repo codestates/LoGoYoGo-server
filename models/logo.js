@@ -14,11 +14,12 @@ module.exports = (sequelize, DataTypes) => {
   logo.init(
     {
       userId: DataTypes.INTEGER,
-      name: DataTypes.STRING,
+      name: DataTypes.TEXT,
       setting: DataTypes.STRING,
     },
     {
       sequelize,
+      timestamps: false,
       modelName: "logo",
     },
   );

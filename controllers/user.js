@@ -105,4 +105,38 @@ module.exports = {
     fs.writeFileSync("./save.txt", JSON.stringify(text));
     res.status(200).json({ text: text });
   },
+
+  saveimg: async (req, res) => {
+    const text = req.body.dataurl;
+    fs.writeFileSync("./saveimg.txt", JSON.stringify(text));
+    res.status(200).json({ text: text });
+  },
+
+  savelogo: async (req, res) => {
+    const accessToken = req.body.accessToken;
+    const json = req.body.json;
+    const userinfo = jwt.verify(accessToken, process.env.ACCESS_SECRET);
+
+    const users = await user.findOne({
+      where: { email: userinfo.email },
+    });
+
+    logo.create({ userId: users.dataValues.id, name: users.dataValues.name, setting: `${json}` });
+    res.status(200).json({ message: "ok" });
+  },
+
+  loadlogo: async (req, res) => {
+    const accessToken = req.body.accessToken;
+    const userinfo = jwt.verify(accessToken, process.env.ACCESS_SECRET);
+    const userId = userinfo.id;
+    const logos = await logo.findAll({
+      where: { userId: userId },
+    });
+
+    // if (logos.length > 3) {
+    //   logo.destroy({ where: { userId: userId } });
+    // }
+
+    res.status(200).json({ message: "ok", json: logos.slice(-1) });
+  },
 };
