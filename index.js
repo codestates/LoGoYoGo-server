@@ -28,6 +28,10 @@ app.post("/user/userinfo", user.userinfo);
 app.post("/user/deleteid", user.deleteid);
 
 // app.post("/save", user.save);
+// app.post("/saveimg", user.saveimg);
+
+app.post("/savelogo", user.savelogo);
+app.post("/loadlogo", user.loadlogo);
 
 app.post("/callback", callback);
 
