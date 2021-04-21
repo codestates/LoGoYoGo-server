@@ -133,9 +133,9 @@ module.exports = {
       where: { userId: userId },
     });
 
-    // if (logos.length > 3) {
-    //   logo.destroy({ where: { userId: userId } });
-    // }
+    if (logos.length > 3) {
+      logo.destroy({ where: { id: logos[0].id } });
+    }
 
     res.status(200).json({ message: "ok", json: logos.slice(-1) });
   },
